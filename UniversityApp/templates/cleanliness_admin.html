@@ -1,0 +1,238 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Kanadaka&family=Sacramento&display=swap" rel="stylesheet">
+    <title>University Helping Hand Services</title>
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
+<style>
+    body
+    {
+        background-color: rgb(239, 239, 248);
+    }
+    #orders
+    {
+        background-color: white;
+    }
+    #cart_heading
+    {
+            font-family: 'Akaya Kanadaka', cursive;
+    }
+</style>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><img src="{% static 'images/logo1.png' %}" height="50%" width="70%"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <span class="nav-link" href="">Welcome Back {{name}}!<span class="sr-only">(current)</span></span>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="index.html">
+                <a href=logout class="btn btn-outline-secondary my-2 my-sm-0">Log Out</a>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="border rounded p-4 m-4" id="orders">
+            <p class="display-4 p-4 ml-4" id="cart_heading">Complaints</p>
+            <hr>
+            <table class="table" >
+                <thead>
+                    <tr>
+                        <th>Sno.</th>
+                        <th>Name</th>
+                        <th>PRN No.</th>
+                        <th>Building Name</th>
+                        <th>Classroom No.</th>
+                        <th>Description</th>
+                        <th>Set Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for complaint in complaint_list %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{complaint.user.first_name}}</td>
+                            <td>{{complaint.user.prn}}</td>
+                            <td>{{complaint.building_name}}</td>
+                            <td>{{complaint.classroom}}</td>
+                            <td>{{complaint.description}}</td> 
+                            <form method="POST" action="/cleanliness_admin">
+                                {% csrf_token %}
+                                <input type="hidden" value={{complaint.id}} name="complaint_id">
+                                <td><input class="btn btn-info btn-sm" type="submit" id="button-addon2"  value="Accepted"></td> 
+                            </form>                      
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>      
+        </div>
+    </div>      
+    
+    <hr style="border: 2px solid lavender ;">
+
+    <section class="text-gray-700 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Cleanliness
+                </h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Similar to the basic essentials of life like food, water, shelter, cleanliness also holds great significance in life. It is, in fact, one of the most important things for healthy living. The first and foremost importance of cleanliness
+                    is that it means the absence of disease. Cleanliness helps us stay refreshed and hygienic on a personal level.
+                </p>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{% static 'images/dashboard7.jpg' %}">
+                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Benjamin Disraeli</h1>
+                            <p class="leading-relaxed">A University should be a place of light, of liberty, and of learning.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{% static 'images/dashboard8.jpg' %}">
+                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Henri Nouwen</h1>
+                            <p class="leading-relaxed">The university has become a place that prepares you for the fights in the world. .
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{% static 'images/dashboard9.jpg' %}">
+                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Narendra Modi</h1>
+                            <p class="leading-relaxed">Cleaning up the country cannot be the sole responsibility of sweepers. Do citizens have no role in this? We have to change this mindset. .
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{% static 'images/dashboard10.jpg' %}">
+                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Sidney Sheldon </h1>
+                            <p class="leading-relaxed">"Libraries store the energy that fuels the imagination. They open up windows to the world and inspire us to explore and achieve, and contribute to improving our quality of life.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{% static 'images/dashboard11.jpg' %}">
+                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Jerry Kramer</h1>
+                            <p class="leading-relaxed">College was especially sweet because of the positive, hopeful atmosphere of a college campus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 sm:w-1/2 p-4">
+                    <div class="flex relative">
+                        <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="{% static 'images/dashboard12.jpg' %}">
+                        <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            <h2 class="tracking-widest text-sm title-font font-medium text-indigo-500 mb-1">
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">Sarah J. Maas </h1>
+                            <p class="leading-relaxed">"Libraries were full of ideas – perhaps the most dangerous and powerful of all weapons."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="text-gray-700 body-font" style="background-color: black;">
+        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                <a class="navbar-brand" href="#"><img src="{% static 'images/logo1.png' %}" height="50%" width="70%"></a>
+            </a>
+            <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2020 University Helping Hand
+
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                <a class="text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path
+                            d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path stroke="none"
+                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                        </path>
+                        <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+    </script>
+
+    <!-- Option 2: jQuery, Popper.js, and Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<h1 style="font-size: 30px; text-align: center; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            Welcome to U2H Canteen </h1>
+        <p style="text-align: center;"><i>"Rain or shine, it’s time to dine"</i></p>
+
+            <!-- {% for item in items %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{item.item_img.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.item_name}}</h5>
+                    <p class="card-text">{{item.price}}</p>
+                    <p class="card-text">{{item.category}}</p>
+                </div>
+              </div>
+              {% endfor %} -->
+
+              <form action="" method="POST">
+
+                {% csrf_token %}
+
+                <select class="form-select" aria-label="Default select example" id="category-select" name="category">
+                    <option selected>Choose</option>
+                    <option value="{{item.category}}">{{item.category}}</option>
+                  </select>
+
+                  <input type="submit" class="btn btn-primary" value="Submit">
+
+              </form>
+
+              
+              {% for item in items %}
+              <div class="card mb-3" style="max-width: 500px;" id="items-div">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{item.item_img.url}}" alt="..." height="100%" width="100%">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <p class="card-title"><b>Item Name : </b>{{item.item_name}}</p>
+                      <p class="card-text"><b>Price : </b>Rs. {{item.price}}</p>
+                      <!-- <p class="card-text"><small class="text-muted">{{item.category}}</small></p> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
